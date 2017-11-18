@@ -1,0 +1,174 @@
+{
+  "nlp": {
+    "sentences": [
+      {
+        "raw": "How will the weather today be today?",
+        "tokens": [
+          "How",
+          "will",
+          "the",
+          "weather",
+          "today",
+          "be",
+          "today",
+          "?"
+        ],
+        "posTags": [
+          "WRB",
+          "MD",
+          "DT",
+          "NN",
+          "NN",
+          "VB",
+          "NN",
+          "."
+        ],
+        "personNames": []
+      }
+    ]
+  },
+  "wordnet": {
+    "sentences": [
+      {
+        "analyzedWords": [
+          null,
+          null,
+          null,
+          {
+            "stem": "weather",
+            "lemma": "weather",
+            "gloss": "the atmospheric conditions that comprise the state of the atmosphere in terms of temperature and wind and clouds and precipitation; \"they were hoping for good weather\"; \"every day we have weather conditions and yesterday was no exception\"; \"the conditions were too rainy for playing in the snow\"",
+            "lexicalName": "noun.phenomenon",
+            "lexialDescription": "nouns denoting natural phenomena",
+            "synonyms": [
+              "weather",
+              "weather_condition",
+              "conditions",
+              "atmospheric_condition"
+            ],
+            "hypernyms": [
+              "atmospheric_phenomenon"
+            ]
+          },
+          {
+            "stem": "today",
+            "lemma": "today",
+            "gloss": "the present time or age; \"the world of today\"; \"today we have computers\"",
+            "lexicalName": "noun.time",
+            "lexialDescription": "nouns denoting time and temporal relations",
+            "synonyms": [
+              "today"
+            ],
+            "hypernyms": [
+              "present",
+              "nowadays"
+            ]
+          },
+          {
+            "stem": "be",
+            "lemma": "be",
+            "gloss": "have the quality of being; (copula, used with an adjective or a predicate noun); \"John is rich\"; \"This is not a good answer\"",
+            "lexicalName": "verb.stative",
+            "lexialDescription": "verbs of being, having, spatial relations",
+            "synonyms": [
+              "be"
+            ],
+            "hypernyms": []
+          },
+          {
+            "stem": "today",
+            "lemma": "today",
+            "gloss": "the present time or age; \"the world of today\"; \"today we have computers\"",
+            "lexicalName": "noun.time",
+            "lexialDescription": "nouns denoting time and temporal relations",
+            "synonyms": [
+              "today"
+            ],
+            "hypernyms": [
+              "present",
+              "nowadays"
+            ]
+          },
+          null
+        ]
+      }
+    ]
+  },
+  "classification": {
+    "sentences": [
+      {
+        "predictions": {
+          "topics": {
+            "other": 1.0311390925275075E-12,
+            "greeting": 1.5602515404705103E-10,
+            "weather": 0.9999999998425791,
+            "farewell": 3.645931409646386E-13
+          },
+          "phraseTypes": {
+            "LOCATION": 0.0,
+            "DECLARATIVE": 0.0,
+            "CHOICE": 0.0,
+            "DISTANCE": 0.0,
+            "DESCRIPTION": 1.0,
+            "QUANTITY": 0.0,
+            "INFORMATION": 0.0,
+            "IMPERATIVE": 0.0,
+            "FREQUENCY": 0.0,
+            "PEOPLE": 0.0,
+            "OCCASION": 0.0,
+            "REASON": 0.0
+          },
+          "tenses": {
+            "simplePresentPerfect": 1.1140634158150197E-13,
+            "simplePastPerfect": 8.444923452054786E-16,
+            "conditionalProgressive": 1.6062721181766584E-12,
+            "simplePresent": 2.3518154633385805E-7,
+            "simpleFuturePerfect": 2.655339048779898E-7,
+            "pastProgressive": 3.983311678399062E-21,
+            "nothing": 3.3565970747666623E-12,
+            "presentPerfectProgressive": 1.671222293338427E-27,
+            "conditionalPerfect": 4.543329848241115E-15,
+            "goingToFuture": 1.906181273623604E-21,
+            "conditionalSimple": 1.8320996819015383E-6,
+            "presentProgressive": 6.739210962632265E-19,
+            "simplePast": 1.6062721181766826E-12,
+            "conditionalPerfectProgressive": 3.3020751740185526E-27,
+            "pastPerfectProgressive": 9.878009926039867E-30,
+            "futurePerfectProgressive": 3.0427660881857293E-21,
+            "willFuture": 0.999997667178181
+          }
+        }
+      }
+    ]
+  },
+  "sentiment": {
+    "sentiments": [
+      {
+        "value": 0.0,
+        "wordValues": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "dialogmanager": {
+    "responses": [
+      {
+        "subject": "i",
+        "object": "know",
+        "verb": "do not",
+        "type": "NOUN"
+      }
+    ]
+  },
+  "nlg": {
+    "text": "I does not know."
+  }
+}

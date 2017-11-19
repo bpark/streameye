@@ -28,16 +28,21 @@ app.post('/api',function(req, res){
   });
 });
 
-function intervalFunc(count) {
-}
-
 app.ws('/echo', function(ws, req) {
-  ws.on('message', function(msg) {
-    var i = 0;
-    setInterval(function() {
-      ws.send('' + i++);
-    }, 10);
-  });
+  ws.on('message', function (msg) {
+    var messsages = [
+      '[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]}]',
+      '{"squadName":"Superherosquad","homeTown":"MetroCity","formed":2016,"secretBase":"Supertower","active":true,"members":[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]},{"name":"EternalFlame","age":1000000,"secretIdentity":"Unknown","powers":["Immortality","HeatImmunity","Inferno","Teleportation","Interdimensionaltravel"]}]}'
+    ];
+    setInterval(function () {
+      var rnd = Math.random();
+      var index = 0;
+      if (rnd > 0.5) {
+        index = 1;
+      }
+      ws.send(messsages[index]);
+    }, 20);
+  })
 });
 
 app.listen(3000);

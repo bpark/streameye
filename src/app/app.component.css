@@ -1,0 +1,12 @@
+.message-box {
+  background-color: #2f3646;
+  margin-bottom: 2px;
+  color: #aeaeae;
+  font-size: 13px;
+  height:70px;
+  display: block;
+}
+
+.color-marine {
+  background-color: #2f3646;
+}

@@ -1,9 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ServerSocket} from './comlink/server-socket.service';
-import {Subscription} from 'rxjs/Subscription';
-import * as Collections from 'typescript-collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/bufferCount';
+import 'rxjs/add/operator/bufferTime';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/from';
+import {ChartData, LimitedQueue, single, chartDataQueue} from './chart/chart-data';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -12,35 +15,55 @@ import 'rxjs/add/operator/bufferCount';
   providers: [ServerSocket]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private static MAX_QUEUE_SIZE = 2000;
-  private socketSubscription: Subscription;
-  messageQueue = new Collections.Queue();
   messageObserver: Observable<string[]>;
+  countSubscription: Subscription;
+
+  single: any[];
+  multi: any[];
+
+//  view: any[] = [700, 400];
+
+  // options
+  showXAxis = false;
+  showYAxis = true;
+  gradient = true;
+  showLegend = false;
+  showXAxisLabel = false;
+  xAxisLabel = 'Country';
+  showYAxisLabel = false;
+  yAxisLabel = 'Population';
+
+  colorScheme = {
+    domain: ['#a41956']
+  };
+
 
   constructor(private serverSocket: ServerSocket) {
+    for (let i = 0; i < 100; i++) {
+      chartDataQueue.enqueue(new ChartData(0));
+    }
+    Object.assign(this, {single});
+
   }
 
   ngOnInit() {
+
     this.serverSocket.connect();
 
-    this.messageObserver = this.serverSocket.messages.bufferCount(20);
+    const itemQueue = new LimitedQueue<string>(10, 'test');
+    this.messageObserver = this.serverSocket.messages.bufferCount(10).map(items => itemQueue.enqueueAll(items));
 
-    this.socketSubscription = this.serverSocket.messages.subscribe((message: string) => {
-      console.log('received message from server: ', message);
-      if (this.messageQueue.size() >= AppComponent.MAX_QUEUE_SIZE) {
-        this.messageQueue.dequeue();
-      }
-      this.messageQueue.enqueue(message);
+    this.countSubscription = this.serverSocket.messages.bufferTime(1000).map(items => items.length).subscribe((count: number) => {
+      const data = chartDataQueue.enqueue(new ChartData(count));
+      this.single = [...data];
     });
 
   }
 
   clicked(event) {
-    this.serverSocket.connect();
     this.serverSocket.send('hello world');
   }
 
   ngOnDestroy() {
-    this.socketSubscription.unsubscribe();
   }
 }

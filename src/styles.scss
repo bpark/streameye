@@ -1,6 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en");
+/*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en");*/
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
 
-body {
+/*body {
   color: #ffffff;
   background: #1b1e27 none;
   font-family: 'Open Sans', helvetica, arial, sans-serif;
@@ -53,4 +55,4 @@ h1 {
 .navy-bg {
   background-color: #1ab394;
   color: #ffffff;
-}
+}*/

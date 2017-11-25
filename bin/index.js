@@ -29,18 +29,23 @@ app.post('/api',function(req, res){
 });
 
 app.ws('/echo', function(ws, req) {
+  var messsages = [
+    '[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]}]',
+    '{"squadName":"Superherosquad","homeTown":"MetroCity","formed":2016,"secretBase":"Supertower","active":true,"members":[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]},{"name":"EternalFlame","age":1000000,"secretIdentity":"Unknown","powers":["Immortality","HeatImmunity","Inferno","Teleportation","Interdimensionaltravel"]}]}'
+  ];
+  var count = 0;
   ws.on('message', function (msg) {
-    var messsages = [
-      '[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]}]',
-      '{"squadName":"Superherosquad","homeTown":"MetroCity","formed":2016,"secretBase":"Supertower","active":true,"members":[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]},{"name":"EternalFlame","age":1000000,"secretIdentity":"Unknown","powers":["Immortality","HeatImmunity","Inferno","Teleportation","Interdimensionaltravel"]}]}'
-    ];
-    setInterval(function () {
+    var id = setInterval(function () {
       var rnd = Math.random();
       var index = 0;
       if (rnd > 0.5) {
         index = 1;
       }
       ws.send(messsages[index]);
+      if (count++ > 200) {
+        count = 0;
+        clearInterval(id)
+      }
     }, 20);
   })
 });

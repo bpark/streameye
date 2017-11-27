@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { StreamTableComponent } from './stream-table/stream-table.component';
 import { StreamBarchartComponent } from './stream-barchart/stream-barchart.component';
 import {ServerSocket} from './socket/socket.service';
+import {ConfigService} from './config/config.service';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -19,10 +21,12 @@ import {ServerSocket} from './socket/socket.service';
   imports: [
     BrowserModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
-    ServerSocket
+    ServerSocket,
+    ConfigService,
   ],
   bootstrap: [
     AppComponent

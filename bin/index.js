@@ -7,8 +7,8 @@ var expressWs = require('express-ws')(app);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/api', function(req, res){
-  fs.readFile('bin/single-response.json', function(err, data) {
+app.get('/config', function(req, res){
+  fs.readFile('bin/config.json', function(err, data) {
     if (err) {
       throw err;
     } else {

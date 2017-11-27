@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ServerSocket} from './socket/socket.service';
+import {ConfigService} from './config/config.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,22 @@ import {ServerSocket} from './socket/socket.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  constructor(private serverSocket: ServerSocket) {
+  hasError = false;
+  isReady = false;
+
+  constructor(private serverSocket: ServerSocket,
+              private configService: ConfigService) {
   }
 
   ngOnInit() {
-    this.serverSocket.connect();
+    this.configService.getConfig().subscribe(
+      appConfig => {
+        this.isReady = true;
+        this.serverSocket.connect();
+      },
+      error => {
+        this.hasError = true;
+    });
   }
 
   clicked(event) {

@@ -29,6 +29,11 @@
   </div>
 </nav>
 
-<app-stream-barchart></app-stream-barchart>
-<app-stream-table></app-stream-table>
+<div *ngIf="hasError" class="alert alert-danger" role="alert">
+  <strong>Error!</strong> Error during loading configuration!
+</div>
 
+<div *ngIf="isReady">
+  <app-stream-barchart></app-stream-barchart>
+  <app-stream-table></app-stream-table>
+</div>

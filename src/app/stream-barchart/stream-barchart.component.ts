@@ -24,7 +24,7 @@ export class StreamBarchartComponent implements OnInit {
   // options
   showXAxis = false;
   showYAxis = true;
-  gradient = true;
+  gradient = false;
   showLegend = false;
   showXAxisLabel = false;
   xAxisLabel = 'Country';
@@ -32,7 +32,7 @@ export class StreamBarchartComponent implements OnInit {
   yAxisLabel = 'Population';
 
   colorScheme = {
-    domain: ['#a41956']
+    domain: ['#ea6100']
   };
 
   constructor(private serverSocket: ServerSocket) {

@@ -1,6 +1,8 @@
 <div class="container-fluid my-5">
-  <div class="d-flex flex-column align-items-stretch flex-wrap">
+  <div class="d-flex flex-column align-items-stretch flex-wrap streamchart">
     <ngx-charts-bar-vertical
+      [view]="view"
+      [animations]="animations"
       [scheme]="colorScheme"
       [results]="single"
       [gradient]="gradient"
@@ -11,7 +13,8 @@
       [showYAxisLabel]="showYAxisLabel"
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
-      (select)="onSelect($event)">
+      [tooltipDisabled]="tooltipDisabled"
+      [barPadding]="barPadding">
     </ngx-charts-bar-vertical>
   </div>
 </div>

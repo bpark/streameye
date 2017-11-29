@@ -35,7 +35,7 @@ export class StreamBarchartComponent implements OnInit {
   barPadding = 8;
 
   colorScheme = {
-    domain: ['#ea6100']
+    domain: ['#ea0015']
   };
 
   constructor(private serverSocket: ServerSocket) {

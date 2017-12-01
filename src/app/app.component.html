@@ -19,13 +19,16 @@
         <a class="nav-link" href="#">About</a>
       </li>
       <li class="nav-item">
-        <button class="btn btn-secondary" type="button" (click)="clicked()">Start</button>
+        <button class="btn btn-secondary" type="button" (click)="clicked()">
+          <i fa class="fa fa-play fa-color-white"></i>
+        </button>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="navbar-nav mr-sm-1">
+      <li class="nav-item my-2 mr-sm-2">
+        <fa [size]="2" [name]="connectionStatusObserver | async"></fa>
+      </li>
+    </ul>
   </div>
 </nav>
 

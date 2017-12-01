@@ -8,6 +8,7 @@ import 'rxjs/add/operator/share';
 export class ServerSocket {
   private inputStream: QueueingSubject<string>;
   public messages: Observable<string>;
+  public connectionStatus: Observable<number>;
 
   public connect() {
     if (this.messages) {
@@ -17,10 +18,12 @@ export class ServerSocket {
     // Using share() causes a single websocket to be created when the first
     // observer subscribes. This socket is shared with subsequent observers
     // and closed when the observer count falls to zero.
-    this.messages = websocketConnect(
+    const {messages, connectionStatus} = websocketConnect(
       'ws://localhost:3000/echo',
       this.inputStream = new QueueingSubject<string>()
-    ).messages.share();
+    );
+    this.messages = messages.share();
+    this.connectionStatus = connectionStatus.share();
   }
 
   public send(message: string): void {

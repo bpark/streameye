@@ -10,6 +10,7 @@ import { StreamBarchartComponent } from './stream-barchart/stream-barchart.compo
 import {ServerSocket} from './socket/socket.service';
 import {ConfigService} from './config/config.service';
 import {HttpClientModule} from '@angular/common/http';
+import {Angular2FontawesomeModule} from 'angular2-fontawesome';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    Angular2FontawesomeModule
   ],
   providers: [
     ServerSocket,

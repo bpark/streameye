@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  clicked(event) {
+  clicked() {
     this.serverSocket.send('hello world');
   }
 

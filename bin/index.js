@@ -1,7 +1,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var sockjs = require('sockjs');
 var fs = require('fs');
 var app = express();
+var sockServer = sockjs.createServer();
+var http    = require('http');
 var expressWs = require('express-ws')(app);
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,6 +51,15 @@ app.ws('/echo', function(ws, req) {
       }
     }, 20);
   })
+});
+
+var httpServer = http.createServer(app);
+sockServer.installHandlers(httpServer, {prefix:'/messages'});
+
+sockServer.on('connection', function(conn) {
+  conn.on('streams', function(message) {
+    conn.write(message);
+  });
 });
 
 app.listen(3000);

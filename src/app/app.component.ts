@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ServerSocket} from './socket/socket.service';
 import {ConfigService} from './config/config.service';
 import {Observable} from 'rxjs/Observable';
+import {SockJsService} from './streaming/sock-js.service';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   constructor(private serverSocket: ServerSocket,
-              private configService: ConfigService) {
+              private configService: ConfigService,
+              private sockJsService: SockJsService) {
   }
 
   ngOnInit() {
+    this.sockJsService.connect();
     this.configService.getConfig().subscribe(
       appConfig => {
         this.isReady = true;

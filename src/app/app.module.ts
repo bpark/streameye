@@ -11,6 +11,7 @@ import {ServerSocket} from './socket/socket.service';
 import {ConfigService} from './config/config.service';
 import {HttpClientModule} from '@angular/common/http';
 import {Angular2FontawesomeModule} from 'angular2-fontawesome';
+import {SockJsService} from './streaming/sock-js.service';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {Angular2FontawesomeModule} from 'angular2-fontawesome';
   providers: [
     ServerSocket,
     ConfigService,
+    SockJsService
   ],
   bootstrap: [
     AppComponent

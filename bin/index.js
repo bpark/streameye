@@ -54,12 +54,12 @@ app.ws('/echo', function(ws, req) {
 });
 
 var httpServer = http.createServer(app);
-sockServer.installHandlers(httpServer, {prefix:'/messages'});
+sockServer.installHandlers(httpServer, {prefix:'/streams'});
 
 sockServer.on('connection', function(conn) {
-  conn.on('streams', function(message) {
+  conn.on('data', function(message) {
     conn.write(message);
   });
 });
 
-app.listen(3000);
+httpServer.listen(3000);

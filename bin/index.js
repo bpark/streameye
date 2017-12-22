@@ -31,34 +31,29 @@ app.post('/api',function(req, res){
   });
 });
 
-app.ws('/echo', function(ws, req) {
+var httpServer = http.createServer(app);
+sockServer.installHandlers(httpServer, {prefix:'/streams'});
+
+sockServer.on('connection', function(conn) {
   var messsages = [
     '[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]}]',
     '{"squadName":"Superherosquad","homeTown":"MetroCity","formed":2016,"secretBase":"Supertower","active":true,"members":[{"name":"MoleculeMan","age":29,"secretIdentity":"DanJukes","powers":["Radiationresistance","Turningtiny","Radiationblast"]},{"name":"MadameUppercut","age":39,"secretIdentity":"JaneWilson","powers":["Milliontonnepunch","Damageresistance","Superhumanreflexes"]},{"name":"EternalFlame","age":1000000,"secretIdentity":"Unknown","powers":["Immortality","HeatImmunity","Inferno","Teleportation","Interdimensionaltravel"]}]}'
   ];
   var count = 0;
-  ws.on('message', function (msg) {
+  conn.on('data', function(message) {
+    //conn.write(message);
     var id = setInterval(function () {
       var rnd = Math.random();
       var index = 0;
       if (rnd > 0.5) {
         index = 1;
       }
-      ws.send(messsages[index]);
+      conn.write(messsages[index]);
       if (count++ > 200) {
         count = 0;
         clearInterval(id)
       }
     }, 20);
-  })
-});
-
-var httpServer = http.createServer(app);
-sockServer.installHandlers(httpServer, {prefix:'/streams'});
-
-sockServer.on('connection', function(conn) {
-  conn.on('data', function(message) {
-    conn.write(message);
   });
 });
 

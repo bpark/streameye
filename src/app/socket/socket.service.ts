@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { QueueingSubject } from 'queueing-subject';
 import { Observable } from 'rxjs/Observable';
-import websocketConnect from 'rxjs-websockets';
+import websocketConnect, {IWebSocket} from 'rxjs-websockets';
 import 'rxjs/add/operator/share';
+import * as SockJS from "sockjs-client";
 
 @Injectable()
 export class ServerSocket {
@@ -18,9 +19,17 @@ export class ServerSocket {
     // Using share() causes a single websocket to be created when the first
     // observer subscribes. This socket is shared with subsequent observers
     // and closed when the observer count falls to zero.
+    /*
     const {messages, connectionStatus} = websocketConnect(
       'ws://localhost:3000/echo',
       this.inputStream = new QueueingSubject<string>()
+    );*/
+
+    const {messages, connectionStatus} = websocketConnect(
+      'http://localhost:3000/streams',
+      this.inputStream = new QueueingSubject<string>(),
+      ['xhr-polling'],
+      sockJsWebsocketFactory
     );
     this.messages = messages.share();
     this.connectionStatus = connectionStatus.share();
@@ -34,3 +43,8 @@ export class ServerSocket {
     this.inputStream.next(message);
   }
 }
+
+const sockJsWebsocketFactory = (url: string, protocol?: string | string[]): IWebSocket => {
+  return new SockJS(url,  null, {transports: protocol});
+};
+

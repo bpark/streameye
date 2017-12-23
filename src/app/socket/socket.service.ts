@@ -28,7 +28,7 @@ export class ServerSocket {
     const {messages, connectionStatus} = websocketConnect(
       'http://localhost:3000/streams',
       this.inputStream = new QueueingSubject<string>(),
-      ['xhr-polling'],
+      undefined,
       sockJsWebsocketFactory
     );
     this.messages = messages.share();

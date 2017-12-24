@@ -3,7 +3,8 @@ import { QueueingSubject } from 'queueing-subject';
 import { Observable } from 'rxjs/Observable';
 import websocketConnect, {IWebSocket} from 'rxjs-websockets';
 import 'rxjs/add/operator/share';
-import * as SockJS from "sockjs-client";
+import * as SockJS from 'sockjs-client';
+import {AppConfig} from '../config/app-config';
 
 @Injectable()
 export class ServerSocket {
@@ -11,7 +12,7 @@ export class ServerSocket {
   public messages: Observable<string>;
   public connectionStatus: Observable<number>;
 
-  public connect() {
+  public connect(appConfig: AppConfig) {
     if (this.messages) {
       return;
     }
@@ -26,7 +27,7 @@ export class ServerSocket {
     );*/
 
     const {messages, connectionStatus} = websocketConnect(
-      'http://localhost:3000/streams',
+      appConfig.streamingUrl,
       this.inputStream = new QueueingSubject<string>(),
       undefined,
       sockJsWebsocketFactory

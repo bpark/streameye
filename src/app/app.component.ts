@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.configService.getConfig().subscribe(
       appConfig => {
         this.isReady = true;
-        this.serverSocket.connect();
+        this.serverSocket.connect(appConfig);
         this.connectionStatusObserver = this.serverSocket.connectionStatus.map(value => this.classMapping.get(value));
       },
       error => {

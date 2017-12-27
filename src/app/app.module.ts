@@ -11,6 +11,7 @@ import {ServerSocket} from './socket/socket.service';
 import {ConfigService} from './config/config.service';
 import {HttpClientModule} from '@angular/common/http';
 import {Angular2FontawesomeModule} from 'angular2-fontawesome';
+import {PrettyJsonModule} from 'angular2-prettyjson';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {Angular2FontawesomeModule} from 'angular2-fontawesome';
     NgxChartsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+    PrettyJsonModule
   ],
   providers: [
     ServerSocket,

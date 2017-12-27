@@ -16,16 +16,17 @@ import 'rxjs/add/observable/from';
 })
 export class StreamTableComponent implements OnInit {
 
-  messageObserver: Observable<string[]>;
+  messageObserver: Observable<TableMessage[]>;
   private filter = '';
 
   constructor(private serverSocket: ServerSocket) { }
 
   ngOnInit() {
 
-    const itemQueue = new LimitedQueue<string>(10, 'test');
+    const itemQueue = new LimitedQueue<TableMessage>(10, new TableMessage('{}'));
     this.messageObserver = this.serverSocket.messages
       .filter(value => value.includes(this.filter))
+      .map(value => new TableMessage(value))
       .bufferCount(10)
       .map(items => itemQueue.enqueueAll(items));
 
@@ -35,4 +36,20 @@ export class StreamTableComponent implements OnInit {
     this.filter = event.target.value;
   }
 
+  clicked() {
+    console.log('clicked');
+  }
+
+}
+
+export class TableMessage {
+
+  received: number;
+  value: any;
+
+  constructor(value: string) {
+    // this.value = JSON.parse(value);
+    this.value = value;
+    this.received = Date.now();
+  }
 }

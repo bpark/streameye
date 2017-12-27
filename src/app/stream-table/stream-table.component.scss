@@ -1,3 +1,13 @@
 .fa-color-white {
   color: white;
 }
+
+:host /deep/ .string {color:seagreen}
+:host /deep/ .number { color: darkorange; }
+:host /deep/ .boolean { color: dodgerblue; }
+:host /deep/ .null { color: magenta; }
+:host /deep/ .key { color: indianred; }
+
+.json-signs-color {
+  color: #A0AABE;
+}

@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import websocketConnect, {IWebSocket} from 'rxjs-websockets';
 import 'rxjs/add/operator/share';
 import * as SockJS from 'sockjs-client';
-import {AppConfig} from '../config/app-config';
+import {AppConfig, ConnectionType} from '../config/app-config';
+import {Connection} from 'rxjs-websockets/src/index';
 
 @Injectable()
 export class ServerSocket {
@@ -26,12 +27,23 @@ export class ServerSocket {
       this.inputStream = new QueueingSubject<string>()
     );*/
 
+    let connection: Connection;
+
+    if (appConfig.connectMethod && appConfig.connectMethod === ConnectionType.SockJS) {
+        connection = this.connectSockJS(appConfig);
+    } else {
+        connection = this.connectWS(appConfig);
+    }
+
+    const {messages, connectionStatus} = connection;
+
+    /*
     const {messages, connectionStatus} = websocketConnect(
       appConfig.streamingUrl,
       this.inputStream = new QueueingSubject<string>(),
       undefined,
       sockJsWebsocketFactory
-    );
+    );*/
     this.messages = messages.share();
     this.connectionStatus = connectionStatus.share();
   }
@@ -42,6 +54,22 @@ export class ServerSocket {
     // A regular Subject can be used to discard messages sent when the websocket
     // is disconnected.
     this.inputStream.next(message);
+  }
+
+  private connectWS(appConfig: AppConfig): Connection {
+    return websocketConnect(
+      appConfig.streamingUrl,
+      this.inputStream = new QueueingSubject<string>()
+    );
+  }
+
+  private connectSockJS(appConfig: AppConfig): Connection {
+    return websocketConnect(
+      appConfig.streamingUrl,
+      this.inputStream = new QueueingSubject<string>(),
+      undefined,
+      sockJsWebsocketFactory
+    );
   }
 }
 

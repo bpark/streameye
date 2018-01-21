@@ -1,3 +1,4 @@
 {
-  "streamingUrl": "http://localhost:3000/streams"
+  "streamingUrl": "http://localhost:3000/streams",
+  "connectMethod": "SockJS"
 }

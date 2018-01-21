@@ -18,15 +18,6 @@ export class ServerSocket {
       return;
     }
 
-    // Using share() causes a single websocket to be created when the first
-    // observer subscribes. This socket is shared with subsequent observers
-    // and closed when the observer count falls to zero.
-    /*
-    const {messages, connectionStatus} = websocketConnect(
-      'ws://localhost:3000/echo',
-      this.inputStream = new QueueingSubject<string>()
-    );*/
-
     let connection: Connection;
 
     if (appConfig.connectMethod && appConfig.connectMethod === ConnectionType.SockJS) {
@@ -37,13 +28,6 @@ export class ServerSocket {
 
     const {messages, connectionStatus} = connection;
 
-    /*
-    const {messages, connectionStatus} = websocketConnect(
-      appConfig.streamingUrl,
-      this.inputStream = new QueueingSubject<string>(),
-      undefined,
-      sockJsWebsocketFactory
-    );*/
     this.messages = messages.share();
     this.connectionStatus = connectionStatus.share();
   }
